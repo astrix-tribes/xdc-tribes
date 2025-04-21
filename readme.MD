@@ -1,7 +1,7 @@
 # XDC Tribe
 ## 🌐 Overview
 
-Its a decentralized social platform built on the Fuse Network blockchain that enables users to create, join, and engage with interest-based communities (tribes). The platform combines the best aspects of traditional social media with Web3 capabilities, allowing for community ownership, tokenized interactions, and blockchain-based event management.
+Its a decentralized social platform built on the XDC Network blockchain that enables users to create, join, and engage with interest-based communities (tribes). The platform combines the best aspects of traditional social media with Web3 capabilities, allowing for community ownership, tokenized interactions, and blockchain-based event management.
 
 ## ✨ Features
 
@@ -35,8 +35,8 @@ Its a decentralized social platform built on the Fuse Network blockchain that en
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/fuse-tribe.git
-cd fuse-tribe
+git clone https://github.com/yourusername/xdc-tribes.git
+cd xdc-tribes
 ```
 
 2. Install dependencies
