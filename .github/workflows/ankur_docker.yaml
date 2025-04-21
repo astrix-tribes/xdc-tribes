@@ -1,0 +1,86 @@
+name: Build and deploy Node.js app to Docker on VM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Extract short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: Log short SHA
+        run: echo $SHORT_SHA
+
+      - name: Build container image
+        run: docker build -t ${{ secrets.REGISTRY_NAME }}/astrix-tribe:$SHORT_SHA .
+
+      - name: Log in to Azure Container Registry
+        run: docker login ${{ secrets.REGISTRY_NAME }} -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Push image to Azure Container Registry
+        run: docker push ${{ secrets.REGISTRY_NAME }}/astrix-tribe:$SHORT_SHA
+
+      - name: Show ACR image name
+        run: echo ${{ secrets.REGISTRY_NAME }}/astrix-tribe:$SHORT_SHA
+
+      - name: Authenticate Azure Container Registry on VM
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker login ${{ secrets.REGISTRY_NAME }} -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Deploy to VM with Zero Downtime
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: SHORT_SHA
+          script: |
+            echo "Using image tag: $SHORT_SHA"
+
+            # Determine the current active container
+            ACTIVE_CONTAINER=$(docker ps --filter "name=astrix-tribe-blue" --format "{{.Names}}" | head -n 1)
+            if [ "$ACTIVE_CONTAINER" == "astrix-tribe-blue" ]; then
+              NEW_CONTAINER="astrix-tribe-green"
+              OLD_CONTAINER="astrix-tribe-blue"
+              NEW_PORT=5174
+            else
+              NEW_CONTAINER="astrix-tribe-blue"
+              OLD_CONTAINER="astrix-tribe-green"
+              NEW_PORT=5175
+            fi
+
+            echo "Deploying new container: $NEW_CONTAINER on port $NEW_PORT"
+            echo "Previous container: $OLD_CONTAINER"
+
+            # Pull latest image
+            docker pull ${{ secrets.REGISTRY_NAME }}/astrix-tribe:$SHORT_SHA
+
+            # Run the new container on a separate port
+            docker run -d --name $NEW_CONTAINER --env-file ~/secrets/.env --restart=unless-stopped -p $NEW_PORT:5174 ${{ secrets.REGISTRY_NAME }}/astrix-tribe:$SHORT_SHA
+
+            # Wait for health check (adjust based on app startup time)
+            sleep 10
+
+            # Ensure the new container is running
+            if ! docker ps | grep -q "$NEW_CONTAINER"; then
+              echo "Error: New container failed to start. Keeping old container running."
+              exit 1
+            fi
+
+            docker stop $OLD_CONTAINER || true
+            docker rm $OLD_CONTAINER || true

@@ -1,0 +1,66 @@
+/* Custom styling for Tribes GitBook */
+
+/* Add a subtle background to the sidebar */
+.book-summary {
+  background-color: #f9f9f9;
+}
+
+/* Style for headings */
+.markdown-section h1, 
+.markdown-section h2, 
+.markdown-section h3 {
+  color: #0066cc;
+  font-weight: 500;
+}
+
+/* Style for links */
+.markdown-section a {
+  color: #0066cc;
+}
+
+.markdown-section a:hover {
+  text-decoration: underline;
+}
+
+/* Code blocks styling */
+.markdown-section pre {
+  background-color: #f5f7f9;
+  border-radius: 4px;
+}
+
+.markdown-section code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Improve table styling */
+.markdown-section table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.markdown-section table th {
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+}
+
+.markdown-section table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+}
+
+/* Callout boxes */
+.markdown-section blockquote {
+  border-left: 4px solid #0066cc;
+  background-color: rgba(0, 102, 204, 0.05);
+  padding: 15px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Page title */
+.book-header h1 {
+  font-size: 1.5em;
+  opacity: 1;
+} 

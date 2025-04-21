@@ -1,0 +1,29 @@
+{
+  "title": "Tribes - Cross-Chain Social Platform",
+  "description": "Documentation for the Tribes decentralized social platform",
+  "author": "Tribes Team",
+  "language": "en",
+  "plugins": [
+    "theme-default",
+    "search",
+    "expandable-chapters",
+    "back-to-top-button",
+    "code",
+    "hints",
+    "copy-code-button"
+  ],
+  "pluginsConfig": {
+    "theme-default": {
+      "showLevel": false
+    }
+  },
+  "links": {
+    "sidebar": {
+      "GitHub Repository": "https://github.com/fuse-tribes",
+      "Discord Community": "https://discord.gg/fusetribes"
+    }
+  },
+  "styles": {
+    "website": "styles/website.css"
+  }
+} 

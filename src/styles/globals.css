@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-primary: #0a0a0a;
+  --background-secondary: #4e4b51;
+  --background-tertiary: #252729;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --text-accent: #244B81;
+  --border-primary: #252729;
+  --border-secondary: #4e4b51;
+  --button-primary: #244B81;
+  --button-secondary: #4e4b51;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0a] text-[#ffffff];
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-[#4e4b51] border border-[#252729] rounded-lg shadow-lg;
+  }
+
+  .btn-primary {
+    @apply bg-[#244B81] text-white hover:bg-opacity-90 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-[#4e4b51] text-white hover:bg-opacity-90 transition-colors;
+  }
+
+  .text-accent {
+    @apply text-[#244B81];
+  }
+
+  .border-custom {
+    @apply border border-[#252729];
+  }
+} 
+
+
+.parent-container-bg {
+  background-color: red;
+}
+
+.child-container-bg {
+  background-color: #252729;
+}
+
+.sidebar-bg {
+  /* background-color: #244B81; */
+  background-color: red;
+}
