@@ -1,7 +1,7 @@
-# Monad Tribe
+# XDC Tribe
 ## 🌐 Overview
 
-Monad Tribe is a decentralized social platform built on the Fuse Network blockchain that enables users to create, join, and engage with interest-based communities (tribes). The platform combines the best aspects of traditional social media with Web3 capabilities, allowing for community ownership, tokenized interactions, and blockchain-based event management.
+Its a decentralized social platform built on the Fuse Network blockchain that enables users to create, join, and engage with interest-based communities (tribes). The platform combines the best aspects of traditional social media with Web3 capabilities, allowing for community ownership, tokenized interactions, and blockchain-based event management.
 
 ## ✨ Features
 
@@ -64,14 +64,14 @@ yarn dev
 ## 🔧 Technology Stack
 
 - **Frontend**: Next.js 15, React, TypeScript, Tailwind CSS
-- **Blockchain**: Monad Network (EVM compatible)
+- **Blockchain**: XDC Network (EVM compatible)
 - **Smart Contracts**: Solidity
 - **Authentication**: Wallet-based authentication (MetaMask, WalletConnect)
 - **Styling**: Custom UI components with responsive design
 
 ## 📱 Responsive Design
 
-Monad Tribe is fully responsive and optimized for all devices:
+XDC Tribe is fully responsive and optimized for all devices:
 - Mobile-first approach ensures smooth experience on smartphones
 - Tablet and desktop optimizations for larger screens
 - Adaptive UI components that adjust to different viewport sizes
